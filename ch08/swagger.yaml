@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: swagger
+spec:
+  containers:
+  - name: main
+    image: swaggerapi/swagger-ui
+    env:
+    - name: API_URL
+      value: http://localhost:8001/swagger.json
+    ports:
+    - name: swagger-ui
+      containerPort: 8080
+  - name: curl
+    image: tutum/curl
+    command: ["sleep", "9999999"]
+  - name: ambassador
+    image: dshaneg/kubectl-proxy:1.8.0
